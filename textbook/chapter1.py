@@ -248,3 +248,18 @@ map_to_range(0,10,curried_pow(2))
 s = lambda x: x * x
 s # <function <lambda> at 0x000001E86EDF53A0>
 s(12) # 144
+
+# 函数装饰器
+def trace(fn):
+    def wrapped(x):
+        print('-> ', fn, '(', x, ')')
+        return fn(x)
+    return wrapped
+@trace
+def triple(x):
+    return 3 * x
+triple(12)
+"""
+->  <function triple at 0x000001E86EDF5620> ( 12 )
+36
+"""
