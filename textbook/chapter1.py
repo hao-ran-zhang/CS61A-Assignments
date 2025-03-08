@@ -263,3 +263,18 @@ triple(12)
 ->  <function triple at 0x000001E86EDF5620> ( 12 )
 36
 """
+
+## 递归函数
+def sum_digits(n):
+    """返回正整数 n 的所有数字位之和"""
+    if n < 10 :
+        return n
+    else:
+        all_but_last, last = n // 10, n % 10
+        return sum_digits(all_but_last) + last
+
+sum_digits(9)
+sum_digits(18117)                             # 18
+sum_digits(9437184)                           # 36
+sum_digits(11408855402054064613470328848384)  # 126
+
