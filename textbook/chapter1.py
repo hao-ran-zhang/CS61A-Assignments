@@ -278,3 +278,107 @@ sum_digits(18117)                             # 18
 sum_digits(9437184)                           # 36
 sum_digits(11408855402054064613470328848384)  # 126
 
+def fact_iter(n):
+        total, k = 1, 1
+        while k <= n:
+            total, k = total * k, k + 1
+        return total
+
+fact_iter(5)
+
+def factorial(n):
+    if n == 1:
+        return n
+    else:
+        return n * factorial(n - 1)
+
+factorial(5) 
+
+
+# 互递归: 提供了一种在复杂递归程序中维护抽象的机制
+def is_even(n):
+    if n == 0:
+        return True
+    else:
+        return is_odd(n-1)
+    
+def is_odd(n):
+    if n == 0:
+        return False
+    else:
+        return is_even(n-1)
+
+is_odd(4)    # False
+is_even(4)   # True
+
+# break the abstract
+def is_even(n):
+    if n == 0:
+        return True
+    else:
+        if (n - 1) == 0:
+            return False
+        else:
+            return is_even(n - 1 - 1)
+
+is_even(4)
+is_even(5)
+
+# 递归中的打印
+def cascade(n):
+    """Print a cascade of prefixes of n."""
+    print(n)
+    if n >= 10:
+        cascade(n//10)
+        print(n)
+
+cascade(2024)
+
+
+"""
+Alice 总是取走一个石子
+如果桌子上有偶数个石子,Bob 就拿走两个石子，否则就拿走一个石子
+给定 n 个初始石子且 Alice 先开始拿
+"""
+def play_alice(n):
+    if n == 0:
+        print("Bob wins")
+    else:
+        play_bob(n - 1)
+
+def play_bob(n):
+    if n == 0:
+        print("Alice wins")
+    else:
+        if n % 2 == 0:
+            play_alice(n-2)
+        else:
+            play_alice(n-1)
+
+
+play_alice(20)
+
+# 树递归 tree recursion
+def fib(n):
+    if n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    else:
+        return fib(n-1) + fib(n-2)
+
+fib(6)
+
+# 分割
+def count_partitions(n, m):
+    """计算使用最大数 m 的整数分割 n 的方式的数量"""
+    if n == 0:
+        return 1
+    elif n < 0:
+        return 0
+    elif m == 0:
+        return 0
+    else:
+        return count_partitions(n-m, m) + count_partitions(n, m-1)
+
+count_partitions(6, 4)
