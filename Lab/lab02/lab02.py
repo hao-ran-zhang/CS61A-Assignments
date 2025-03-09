@@ -13,7 +13,7 @@ def composite_identity(f, g):
     >>> b1(4)                            # (4 + 1) ** 2 != 4 ** 2 + 1
     False
     """
-    "*** YOUR CODE HERE ***"
+    return lambda x: f(g(x)) == g(f(x))
 
 
 def sum_digits(y):
@@ -59,7 +59,15 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
-    "*** YOUR CODE HERE ***"
+    def counter(n):
+        i = 1
+        count = 0
+        while i <= n:
+            if condition(n, i):
+                count += 1
+            i += 1
+        return count
+    return counter
 
 
 def multiple(a, b):
@@ -70,7 +78,11 @@ def multiple(a, b):
     >>> multiple(14, 21)
     42
     """
-    "*** YOUR CODE HERE ***"
+    n = 1
+    while True:
+        if n % a == 0 and n % b == 0:
+            return n
+        n += 1
 
 
 
@@ -100,5 +112,19 @@ def cycle(f1, f2, f3):
     >>> do_two_cycles(1)
     19
     """
-    "*** YOUR CODE HERE ***"
+    def make_cycle(n):
+        def apply_cycle(x):
+            result = x
+            for i in range(n):
+                # 依次调用 f1, f2, f3，并使用 i % 3 来决定调用哪个函数
+                if i % 3 == 0:
+                    result = f1(result)
+                elif i % 3 == 1:
+                    result = f2(result)
+                else:
+                    result = f3(result)
+            return result
+        return apply_cycle
+
+    return make_cycle
 
